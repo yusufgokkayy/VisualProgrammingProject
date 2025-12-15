@@ -34,7 +34,8 @@ namespace VisualProgrammingProject
         {
             string nereden = txtNereden.Text.Trim();
             string nereye = txtNereye.Text.Trim();
-            DateTime? tarih = dtpTarih.Checked ? dtpTarih.Value : (DateTime?)null;
+            // Tarih kontrolünü düzeltiyoruz - boþ string yerine null gönderiyoruz
+            DateTime? tarih = string.IsNullOrEmpty(nereden) && string.IsNullOrEmpty(nereye) ? (DateTime?)null : dtpTarih.Value.Date;
 
             List<Tren> sonuc = VeriYoneticisi.TrenAra(nereden, nereye, tarih);
             dgvTrenler.DataSource = null;

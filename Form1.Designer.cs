@@ -18,6 +18,7 @@
             this.txtKullanici = new System.Windows.Forms.TextBox();
             this.txtSifre = new System.Windows.Forms.TextBox();
             this.btnGiris = new System.Windows.Forms.Button();
+            this.btnKayit = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,6 +42,14 @@
             this.btnGiris.Text = "Giriş";
             this.btnGiris.UseVisualStyleBackColor = true;
             this.btnGiris.Click += new System.EventHandler(this.btnGiris_Click);
+            
+            this.btnKayit.Location = new System.Drawing.Point(170, 220);
+            this.btnKayit.Name = "btnKayit";
+            this.btnKayit.Size = new System.Drawing.Size(180, 30);
+            this.btnKayit.TabIndex = 6;
+            this.btnKayit.Text = "Kayıt Ol";
+            this.btnKayit.UseVisualStyleBackColor = true;
+            this.btnKayit.Click += new System.EventHandler(this.btnKayit_Click);
             
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(80, 103);
@@ -66,7 +75,8 @@
             
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 280);
+            this.ClientSize = new System.Drawing.Size(450, 300);
+            this.Controls.Add(this.btnKayit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -83,6 +93,7 @@
         private System.Windows.Forms.TextBox txtKullanici;
         private System.Windows.Forms.TextBox txtSifre;
         private System.Windows.Forms.Button btnGiris;
+        private System.Windows.Forms.Button btnKayit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

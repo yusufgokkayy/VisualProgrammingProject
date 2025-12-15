@@ -16,6 +16,10 @@ namespace VisualProgrammingProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+            // Veritabanını başlat
+            VeriYoneticisi.VeriTabaniniBaslat();
+            
             Application.Run(new Form1());
         }
     }

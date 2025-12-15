@@ -19,25 +19,42 @@ namespace VisualProgrammingProject
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            string kullanici = txtKullanici.Text;
-            string sifre = txtSifre.Text;
+            string kullaniciAdi = txtKullanici.Text.Trim();
+            string sifre = txtSifre.Text.Trim();
 
-            if (kullanici == "admin" && sifre == "admin123")
+            if (string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre))
             {
-                AdminPanel adminPanel = new AdminPanel();
-                adminPanel.Show();
-                this.Hide();
+                MessageBox.Show("Kullanıcı adı ve şifre boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (kullanici == "kullanici" && sifre == "123")
+
+            Kullanici kullanici = VeriYoneticisi.KullaniciGiris(kullaniciAdi, sifre);
+
+            if (kullanici != null)
             {
-                KullaniciPanel kullaniciPanel = new KullaniciPanel();
-                kullaniciPanel.Show();
-                this.Hide();
+                if (kullanici.IsAdmin)
+                {
+                    AdminPanel adminPanel = new AdminPanel();
+                    adminPanel.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    KullaniciPanel kullaniciPanel = new KullaniciPanel();
+                    kullaniciPanel.Show();
+                    this.Hide();
+                }
             }
             else
             {
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnKayit_Click(object sender, EventArgs e)
+        {
+            KayitForm kayitForm = new KayitForm();
+            kayitForm.ShowDialog();
         }
     }
 }

@@ -55,7 +55,9 @@
     <Compile Include="AdminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminPanel.Designer.cs" />
+    <Compile Include="AdminPanel.Designer.cs">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bilet.cs" />
     <Compile Include="BiletAlForm.cs">
       <SubType>Form</SubType>
@@ -69,10 +71,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="KayitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KayitForm.Designer.cs">
+      <DependentUpon>KayitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kullanici.cs" />
     <Compile Include="KullaniciPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KullaniciPanel.Designer.cs" />
+    <Compile Include="KullaniciPanel.Designer.cs">
+      <DependentUpon>KullaniciPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tren.cs" />

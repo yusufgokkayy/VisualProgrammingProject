@@ -11,10 +11,24 @@ namespace VisualProgrammingProject
         private static string dbPath = "TrenBileti.db";
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
+        // Veritabaný dosyasýnýn tam yolunu döndüren özellik
+        public static string VeriTabaniYolu
+        {
+            get { return Path.GetFullPath(dbPath); }
+        }
+
         static VeriYoneticisi()
         {
             VeriTabaniOlustur();
             BaslangicVerileriEkle();
+        }
+
+        // Dýþarýdan çaðrýlabilir bir baþlatma metodu
+        public static void VeriTabaniniBaslat()
+        {
+            // Static constructor'ý tetiklemek için boþ bir metod
+            // Bu metod çaðrýldýðýnda static constructor otomatik çalýþacak
+            System.Diagnostics.Debug.WriteLine($"Veritabaný yolu: {VeriTabaniYolu}");
         }
 
         private static void VeriTabaniOlustur()
@@ -22,6 +36,11 @@ namespace VisualProgrammingProject
             if (!File.Exists(dbPath))
             {
                 SQLiteConnection.CreateFile(dbPath);
+                System.Diagnostics.Debug.WriteLine($"Veritabaný oluþturuldu: {VeriTabaniYolu}");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"Mevcut veritabaný kullanýlýyor: {VeriTabaniYolu}");
             }
 
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
@@ -52,6 +71,18 @@ namespace VisualProgrammingProject
                     KoltukNo TEXT
                 )";
 
+                string createKullaniciTable = @"CREATE TABLE IF NOT EXISTS Kullanicilar (
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    KullaniciAdi TEXT UNIQUE NOT NULL,
+                    Sifre TEXT NOT NULL,
+                    Ad TEXT NOT NULL,
+                    Soyad TEXT NOT NULL,
+                    Email TEXT,
+                    Telefon TEXT,
+                    KayitTarihi TEXT,
+                    IsAdmin INTEGER DEFAULT 0
+                )";
+
                 using (SQLiteCommand cmd = new SQLiteCommand(createTrenTable, conn))
                 {
                     cmd.ExecuteNonQuery();
@@ -61,6 +92,44 @@ namespace VisualProgrammingProject
                 {
                     cmd.ExecuteNonQuery();
                 }
+
+                using (SQLiteCommand cmd = new SQLiteCommand(createKullaniciTable, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Varsayýlan admin ve kullanýcý ekle
+                BaslangicKullanicilariEkle(conn);
+            }
+        }
+
+        private static void BaslangicKullanicilariEkle(SQLiteConnection conn)
+        {
+            string countQuery = "SELECT COUNT(*) FROM Kullanicilar";
+            using (SQLiteCommand cmd = new SQLiteCommand(countQuery, conn))
+            {
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                if (count > 0) return;
+            }
+
+            // Admin kullanýcý
+            string insertAdmin = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
+                                 VALUES ('admin', 'admin123', 'Admin', 'User', 'admin@trenbilet.com', '0500000000', @tarih, 1)";
+            
+            // Normal kullanýcý
+            string insertUser = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
+                                VALUES ('kullanici', '123', 'Test', 'Kullanýcý', 'kullanici@trenbilet.com', '0500000001', @tarih, 0)";
+
+            using (SQLiteCommand cmd = new SQLiteCommand(insertAdmin, conn))
+            {
+                cmd.Parameters.AddWithValue("@tarih", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.ExecuteNonQuery();
+            }
+
+            using (SQLiteCommand cmd = new SQLiteCommand(insertUser, conn))
+            {
+                cmd.Parameters.AddWithValue("@tarih", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -138,11 +207,11 @@ namespace VisualProgrammingProject
 
                 if (!string.IsNullOrEmpty(nereden))
                 {
-                    query += " AND LOWER(Nereden) LIKE @nereden";
+                    query += " AND LOWER(Nereden) LIKE LOWER(@nereden)";
                 }
                 if (!string.IsNullOrEmpty(nereye))
                 {
-                    query += " AND LOWER(Nereye) LIKE @nereye";
+                    query += " AND LOWER(Nereye) LIKE LOWER(@nereye)";
                 }
                 if (tarih.HasValue)
                 {
@@ -152,9 +221,9 @@ namespace VisualProgrammingProject
                 using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                 {
                     if (!string.IsNullOrEmpty(nereden))
-                        cmd.Parameters.AddWithValue("@nereden", "%" + nereden.ToLower() + "%");
+                        cmd.Parameters.AddWithValue("@nereden", "%" + nereden + "%");
                     if (!string.IsNullOrEmpty(nereye))
-                        cmd.Parameters.AddWithValue("@nereye", "%" + nereye.ToLower() + "%");
+                        cmd.Parameters.AddWithValue("@nereye", "%" + nereye + "%");
                     if (tarih.HasValue)
                         cmd.Parameters.AddWithValue("@tarih", tarih.Value.ToString("yyyy-MM-dd"));
 
@@ -375,6 +444,96 @@ namespace VisualProgrammingProject
                 using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@trenNo", trenNo);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    return count > 0;
+                }
+            }
+        }
+
+        // KULLANICI ÝÞLEMLERÝ
+        public static bool KullaniciKaydet(string kullaniciAdi, string sifre, string ad, string soyad, string email, string telefon)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                // Kullanýcý adý kontrolü
+                string checkQuery = "SELECT COUNT(*) FROM Kullanicilar WHERE LOWER(KullaniciAdi) = LOWER(@kullaniciAdi)";
+                using (SQLiteCommand cmd = new SQLiteCommand(checkQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (count > 0)
+                    {
+                        return false; // Kullanýcý adý zaten mevcut
+                    }
+                }
+
+                // Kullanýcý ekle
+                string insertQuery = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
+                                     VALUES (@kullaniciAdi, @sifre, @ad, @soyad, @email, @telefon, @kayitTarihi, 0)";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(insertQuery, conn))
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+                    cmd.Parameters.AddWithValue("@sifre", sifre);
+                    cmd.Parameters.AddWithValue("@ad", ad);
+                    cmd.Parameters.AddWithValue("@soyad", soyad);
+                    cmd.Parameters.AddWithValue("@email", email ?? "");
+                    cmd.Parameters.AddWithValue("@telefon", telefon ?? "");
+                    cmd.Parameters.AddWithValue("@kayitTarihi", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    cmd.ExecuteNonQuery();
+                }
+
+                return true;
+            }
+        }
+
+        public static Kullanici KullaniciGiris(string kullaniciAdi, string sifre)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT * FROM Kullanicilar WHERE KullaniciAdi = @kullaniciAdi AND Sifre = @sifre";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+                    cmd.Parameters.AddWithValue("@sifre", sifre);
+
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Kullanici(
+                                Convert.ToInt32(reader["Id"]),
+                                reader["KullaniciAdi"].ToString(),
+                                reader["Sifre"].ToString(),
+                                reader["Ad"].ToString(),
+                                reader["Soyad"].ToString(),
+                                reader["Email"].ToString(),
+                                reader["Telefon"].ToString(),
+                                DateTime.Parse(reader["KayitTarihi"].ToString()),
+                                Convert.ToInt32(reader["IsAdmin"]) == 1
+                            );
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public static bool KullaniciVarMi(string kullaniciAdi)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM Kullanicilar WHERE LOWER(KullaniciAdi) = LOWER(@kullaniciAdi)";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
                     return count > 0;
                 }
