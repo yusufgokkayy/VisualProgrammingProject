@@ -20,7 +20,6 @@ namespace VisualProgrammingProject
             string email = txtEmail.Text.Trim();
             string telefon = txtTelefon.Text.Trim();
 
-            // Validasyonlar
             if (string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre) || 
                 string.IsNullOrEmpty(ad) || string.IsNullOrEmpty(soyad))
             {
@@ -52,7 +51,6 @@ namespace VisualProgrammingProject
                 return;
             }
 
-            // Kayýt iþlemi
             bool sonuc = VeriYoneticisi.KullaniciKaydet(kullaniciAdi, sifre, ad, soyad, email, telefon);
 
             if (sonuc)

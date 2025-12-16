@@ -8,16 +8,12 @@ namespace VisualProgrammingProject
 {
     internal static class Program
     {
-        /// <summary>
-        /// Uygulamanın ana girdi noktası.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            // Veritabanını başlat
             VeriYoneticisi.VeriTabaniniBaslat();
             
             Application.Run(new Form1());

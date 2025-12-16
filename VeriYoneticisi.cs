@@ -11,7 +11,6 @@ namespace VisualProgrammingProject
         private static string dbPath = "TrenBileti.db";
         private static string connectionString = $"Data Source={dbPath};Version=3;";
 
-        // Veritabaný dosyasýnýn tam yolunu döndüren özellik
         public static string VeriTabaniYolu
         {
             get { return Path.GetFullPath(dbPath); }
@@ -23,12 +22,9 @@ namespace VisualProgrammingProject
             BaslangicVerileriEkle();
         }
 
-        // Dýþarýdan çaðrýlabilir bir baþlatma metodu
         public static void VeriTabaniniBaslat()
         {
-            // Static constructor'ý tetiklemek için boþ bir metod
-            // Bu metod çaðrýldýðýnda static constructor otomatik çalýþacak
-            System.Diagnostics.Debug.WriteLine($"Veritabaný yolu: {VeriTabaniYolu}");
+            System.Diagnostics.Debug.WriteLine($"Veritaban? yolu: {VeriTabaniYolu}");
         }
 
         private static void VeriTabaniOlustur()
@@ -36,11 +32,11 @@ namespace VisualProgrammingProject
             if (!File.Exists(dbPath))
             {
                 SQLiteConnection.CreateFile(dbPath);
-                System.Diagnostics.Debug.WriteLine($"Veritabaný oluþturuldu: {VeriTabaniYolu}");
+                System.Diagnostics.Debug.WriteLine($"Veritaban? olu?turuldu: {VeriTabaniYolu}");
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine($"Mevcut veritabaný kullanýlýyor: {VeriTabaniYolu}");
+                System.Diagnostics.Debug.WriteLine($"Mevcut veritaban? kullan?l?yor: {VeriTabaniYolu}");
             }
 
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
@@ -98,7 +94,6 @@ namespace VisualProgrammingProject
                     cmd.ExecuteNonQuery();
                 }
 
-                // Varsayýlan admin ve kullanýcý ekle
                 BaslangicKullanicilariEkle(conn);
             }
         }
@@ -112,13 +107,11 @@ namespace VisualProgrammingProject
                 if (count > 0) return;
             }
 
-            // Admin kullanýcý
             string insertAdmin = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
                                  VALUES ('admin', 'admin123', 'Admin', 'User', 'admin@trenbilet.com', '0500000000', @tarih, 1)";
             
-            // Normal kullanýcý
             string insertUser = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
-                                VALUES ('kullanici', '123', 'Test', 'Kullanýcý', 'kullanici@trenbilet.com', '0500000001', @tarih, 0)";
+                                VALUES ('kullanici', '123', 'Test', 'Kullan?c?', 'kullanici@trenbilet.com', '0500000001', @tarih, 0)";
 
             using (SQLiteCommand cmd = new SQLiteCommand(insertAdmin, conn))
             {
@@ -148,13 +141,13 @@ namespace VisualProgrammingProject
 
                 List<Tren> trenler = new List<Tren>
                 {
-                    new Tren("T101", "Ýstanbul", "Ankara", DateTime.Today.AddDays(1), "09:00", 150, 200),
-                    new Tren("T102", "Ankara", "Ýstanbul", DateTime.Today.AddDays(1), "10:30", 150, 200),
-                    new Tren("T201", "Ýstanbul", "Ýzmir", DateTime.Today.AddDays(1), "08:00", 120, 180),
-                    new Tren("T202", "Ýzmir", "Ýstanbul", DateTime.Today.AddDays(1), "14:00", 120, 180),
-                    new Tren("T301", "Ankara", "Ýzmir", DateTime.Today.AddDays(2), "11:00", 100, 150),
-                    new Tren("T302", "Ýzmir", "Ankara", DateTime.Today.AddDays(2), "16:00", 100, 150),
-                    new Tren("T401", "Ýstanbul", "Konya", DateTime.Today.AddDays(2), "07:30", 130, 160),
+                    new Tren("T101", "?stanbul", "Ankara", DateTime.Today.AddDays(1), "09:00", 150, 200),
+                    new Tren("T102", "Ankara", "?stanbul", DateTime.Today.AddDays(1), "10:30", 150, 200),
+                    new Tren("T201", "?stanbul", "?zmir", DateTime.Today.AddDays(1), "08:00", 120, 180),
+                    new Tren("T202", "?zmir", "?stanbul", DateTime.Today.AddDays(1), "14:00", 120, 180),
+                    new Tren("T301", "Ankara", "?zmir", DateTime.Today.AddDays(2), "11:00", 100, 150),
+                    new Tren("T302", "?zmir", "Ankara", DateTime.Today.AddDays(2), "16:00", 100, 150),
+                    new Tren("T401", "?stanbul", "Konya", DateTime.Today.AddDays(2), "07:30", 130, 160),
                     new Tren("T501", "Ankara", "Konya", DateTime.Today.AddDays(3), "12:00", 90, 140)
                 };
 
@@ -450,14 +443,12 @@ namespace VisualProgrammingProject
             }
         }
 
-        // KULLANICI ÝÞLEMLERÝ
         public static bool KullaniciKaydet(string kullaniciAdi, string sifre, string ad, string soyad, string email, string telefon)
         {
             using (SQLiteConnection conn = new SQLiteConnection(connectionString))
             {
                 conn.Open();
 
-                // Kullanýcý adý kontrolü
                 string checkQuery = "SELECT COUNT(*) FROM Kullanicilar WHERE LOWER(KullaniciAdi) = LOWER(@kullaniciAdi)";
                 using (SQLiteCommand cmd = new SQLiteCommand(checkQuery, conn))
                 {
@@ -465,11 +456,10 @@ namespace VisualProgrammingProject
                     int count = Convert.ToInt32(cmd.ExecuteScalar());
                     if (count > 0)
                     {
-                        return false; // Kullanýcý adý zaten mevcut
+                        return false;
                     }
                 }
 
-                // Kullanýcý ekle
                 string insertQuery = @"INSERT INTO Kullanicilar (KullaniciAdi, Sifre, Ad, Soyad, Email, Telefon, KayitTarihi, IsAdmin) 
                                      VALUES (@kullaniciAdi, @sifre, @ad, @soyad, @email, @telefon, @kayitTarihi, 0)";
 

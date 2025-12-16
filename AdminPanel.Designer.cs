@@ -277,7 +277,7 @@ namespace VisualProgrammingProject
             this.btnIstatistikler.Name = "btnIstatistikler";
             this.btnIstatistikler.Size = new System.Drawing.Size(130, 30);
             this.btnIstatistikler.TabIndex = 4;
-            this.btnIstatistikler.Text = "?? Ýstatistikler";
+            this.btnIstatistikler.Text = "Ýstatistikler";
             this.btnIstatistikler.UseVisualStyleBackColor = true;
             this.btnIstatistikler.Click += new System.EventHandler(this.btnIstatistikler_Click);
             

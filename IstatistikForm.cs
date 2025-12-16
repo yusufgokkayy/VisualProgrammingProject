@@ -36,11 +36,9 @@ namespace VisualProgrammingProject
             // Genel istatistikler
             int toplamBilet = biletler.Count;
             decimal toplamGelir = biletler.Sum(b => b.Fiyat);
-            decimal ortalamaFiyat = toplamGelir / toplamBilet;
 
-            lblToplamBilet.Text = $"?? Toplam Bilet: {toplamBilet}";
-            lblToplamGelir.Text = $"?? Toplam Gelir: {toplamGelir:N2} ?";
-            lblOrtalamaFiyat.Text = $"?? Ortalama Fiyat: {ortalamaFiyat:N2} ?";
+            lblToplamBilet.Text = "Toplam Bilet: " + toplamBilet.ToString();
+            lblToplamGelir.Text = "Toplam Gelir: " + toplamGelir.ToString("N2") + " TL";
 
             // Renkler
             Color[] colors = new Color[]
@@ -154,10 +152,10 @@ namespace VisualProgrammingProject
                 panel.Controls.Add(colorBox);
 
                 // Etiket
-                string valueText = isCurrency ? $"{slices[i].Value:N0} ?" : $"{slices[i].Value}";
+                string valueText = isCurrency ? slices[i].Value.ToString("N0") + " TL" : slices[i].Value.ToString();
                 Label label = new Label
                 {
-                    Text = $"{slices[i].Label}: {valueText} ({slices[i].Percentage:F1}%)",
+                    Text = slices[i].Label + ": " + valueText + " (" + slices[i].Percentage.ToString("F1") + "%)",
                     Location = new Point(x + 20, y - 2),
                     AutoSize = true,
                     Font = new Font("Microsoft Sans Serif", 8F)
@@ -226,7 +224,7 @@ namespace VisualProgrammingProject
                     float labelX = x + (diameter / 2f) + (float)(Math.Cos(radians) * labelRadius);
                     float labelY = y + (diameter / 2f) + (float)(Math.Sin(radians) * labelRadius);
 
-                    string percentText = $"{slice.Percentage:F1}%";
+                    string percentText = slice.Percentage.ToString("F1") + "%";
                     
                     using (Font font = new Font("Arial", 9, FontStyle.Bold))
                     using (SolidBrush textBrush = new SolidBrush(Color.White))
