@@ -101,6 +101,12 @@ namespace VisualProgrammingProject
             VeriYukle();
         }
 
+        private void btnIstatistikler_Click(object sender, EventArgs e)
+        {
+            IstatistikForm istatistikForm = new IstatistikForm();
+            istatistikForm.ShowDialog();
+        }
+
         private void btnCikis_Click(object sender, EventArgs e)
         {
             this.Close();

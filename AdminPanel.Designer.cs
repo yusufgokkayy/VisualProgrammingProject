@@ -45,6 +45,7 @@ namespace VisualProgrammingProject
             this.btnCikis = new System.Windows.Forms.Button();
             this.lblToplamBilet = new System.Windows.Forms.Label();
             this.lblToplamGelir = new System.Windows.Forms.Label();
+            this.btnIstatistikler = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrenler)).BeginInit();
@@ -271,12 +272,22 @@ namespace VisualProgrammingProject
             this.lblToplamGelir.TabIndex = 3;
             this.lblToplamGelir.Text = "Toplam Gelir: 0.00 ?";
             
+            this.btnIstatistikler.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.btnIstatistikler.Location = new System.Drawing.Point(620, 510);
+            this.btnIstatistikler.Name = "btnIstatistikler";
+            this.btnIstatistikler.Size = new System.Drawing.Size(130, 30);
+            this.btnIstatistikler.TabIndex = 4;
+            this.btnIstatistikler.Text = "?? Ýstatistikler";
+            this.btnIstatistikler.UseVisualStyleBackColor = true;
+            this.btnIstatistikler.Click += new System.EventHandler(this.btnIstatistikler_Click);
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(884, 551);
             this.Controls.Add(this.lblToplamGelir);
             this.Controls.Add(this.lblToplamBilet);
+            this.Controls.Add(this.btnIstatistikler);
             this.Controls.Add(this.btnCikis);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -322,5 +333,6 @@ namespace VisualProgrammingProject
         private System.Windows.Forms.Button btnCikis;
         private System.Windows.Forms.Label lblToplamBilet;
         private System.Windows.Forms.Label lblToplamGelir;
+        private System.Windows.Forms.Button btnIstatistikler;
     }
 }
