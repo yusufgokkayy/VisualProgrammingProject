@@ -19,6 +19,11 @@ namespace VisualProgrammingProject
                               "Saat: " + tren.Saat + "\n" +
                               "Fiyat: " + tren.Fiyat.ToString("C") + "\n" +
                               "Boþ Koltuk: " + tren.BosKoltuk;
+            
+            // Kullanýcý bilgilerini boþ býrak - kullanýcý manuel girecek
+            txtAd.Text = "";
+            txtSoyad.Text = "";
+            txtTC.Text = "";
         }
 
         private void btnOnayla_Click(object sender, EventArgs e)

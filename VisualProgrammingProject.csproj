@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Tren.cs" />
     <Compile Include="VeriYoneticisi.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

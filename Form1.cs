@@ -32,6 +32,8 @@ namespace VisualProgrammingProject
 
             if (kullanici != null)
             {
+                Session.AktifKullanici = kullanici;
+                
                 if (kullanici.IsAdmin)
                 {
                     AdminPanel adminPanel = new AdminPanel();

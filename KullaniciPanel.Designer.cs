@@ -43,6 +43,7 @@ namespace VisualProgrammingProject
             ((System.ComponentModel.ISupportInitialize)(this.dgvBiletlerim)).BeginInit();
             this.SuspendLayout();
             
+            // tabControl1
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -52,6 +53,7 @@ namespace VisualProgrammingProject
             this.tabControl1.Size = new System.Drawing.Size(860, 500);
             this.tabControl1.TabIndex = 0;
             
+            // tabPage1
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.btnAra);
             this.tabPage1.Controls.Add(this.dtpTarih);
@@ -69,6 +71,7 @@ namespace VisualProgrammingProject
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Bilet Al";
             
+            // btnAra
             this.btnAra.Location = new System.Drawing.Point(660, 20);
             this.btnAra.Name = "btnAra";
             this.btnAra.Size = new System.Drawing.Size(150, 30);
@@ -77,24 +80,28 @@ namespace VisualProgrammingProject
             this.btnAra.UseVisualStyleBackColor = true;
             this.btnAra.Click += new System.EventHandler(this.btnAra_Click);
             
+            // dtpTarih
             this.dtpTarih.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.dtpTarih.Location = new System.Drawing.Point(470, 25);
             this.dtpTarih.Name = "dtpTarih";
             this.dtpTarih.Size = new System.Drawing.Size(160, 21);
             this.dtpTarih.TabIndex = 7;
             
+            // txtNereye
             this.txtNereye.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.txtNereye.Location = new System.Drawing.Point(270, 25);
             this.txtNereye.Name = "txtNereye";
             this.txtNereye.Size = new System.Drawing.Size(130, 21);
             this.txtNereye.TabIndex = 6;
             
+            // txtNereden
             this.txtNereden.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.txtNereden.Location = new System.Drawing.Point(80, 25);
             this.txtNereden.Name = "txtNereden";
             this.txtNereden.Size = new System.Drawing.Size(130, 21);
             this.txtNereden.TabIndex = 5;
             
+            // label3
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.label3.Location = new System.Drawing.Point(420, 28);
@@ -103,6 +110,7 @@ namespace VisualProgrammingProject
             this.label3.TabIndex = 4;
             this.label3.Text = "Tarih:";
             
+            // label2
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.label2.Location = new System.Drawing.Point(220, 28);
@@ -111,6 +119,7 @@ namespace VisualProgrammingProject
             this.label2.TabIndex = 3;
             this.label2.Text = "Nereye:";
             
+            // label1
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.label1.Location = new System.Drawing.Point(20, 28);
@@ -119,6 +128,7 @@ namespace VisualProgrammingProject
             this.label1.TabIndex = 2;
             this.label1.Text = "Nereden:";
             
+            // dgvTrenler
             this.dgvTrenler.AllowUserToAddRows = false;
             this.dgvTrenler.AllowUserToDeleteRows = false;
             this.dgvTrenler.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -132,6 +142,7 @@ namespace VisualProgrammingProject
             this.dgvTrenler.Size = new System.Drawing.Size(810, 340);
             this.dgvTrenler.TabIndex = 1;
             
+            // btnBiletAl
             this.btnBiletAl.Location = new System.Drawing.Point(680, 420);
             this.btnBiletAl.Name = "btnBiletAl";
             this.btnBiletAl.Size = new System.Drawing.Size(150, 35);
@@ -140,6 +151,7 @@ namespace VisualProgrammingProject
             this.btnBiletAl.UseVisualStyleBackColor = true;
             this.btnBiletAl.Click += new System.EventHandler(this.btnBiletAl_Click);
             
+            // tabPage2
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.Controls.Add(this.btnIptalEt);
             this.tabPage2.Controls.Add(this.txtBiletNo);
@@ -152,6 +164,7 @@ namespace VisualProgrammingProject
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Biletlerim";
             
+            // btnIptalEt
             this.btnIptalEt.Location = new System.Drawing.Point(440, 20);
             this.btnIptalEt.Name = "btnIptalEt";
             this.btnIptalEt.Size = new System.Drawing.Size(120, 30);
@@ -160,12 +173,14 @@ namespace VisualProgrammingProject
             this.btnIptalEt.UseVisualStyleBackColor = true;
             this.btnIptalEt.Click += new System.EventHandler(this.btnIptalEt_Click);
             
+            // txtBiletNo
             this.txtBiletNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.txtBiletNo.Location = new System.Drawing.Point(100, 25);
             this.txtBiletNo.Name = "txtBiletNo";
             this.txtBiletNo.Size = new System.Drawing.Size(320, 21);
             this.txtBiletNo.TabIndex = 2;
             
+            // label4
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.label4.Location = new System.Drawing.Point(20, 28);
@@ -174,6 +189,7 @@ namespace VisualProgrammingProject
             this.label4.TabIndex = 1;
             this.label4.Text = "Bilet No:";
             
+            // dgvBiletlerim
             this.dgvBiletlerim.AllowUserToAddRows = false;
             this.dgvBiletlerim.AllowUserToDeleteRows = false;
             this.dgvBiletlerim.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -187,6 +203,7 @@ namespace VisualProgrammingProject
             this.dgvBiletlerim.Size = new System.Drawing.Size(810, 385);
             this.dgvBiletlerim.TabIndex = 0;
             
+            // btnCikis
             this.btnCikis.Location = new System.Drawing.Point(760, 520);
             this.btnCikis.Name = "btnCikis";
             this.btnCikis.Size = new System.Drawing.Size(110, 30);
@@ -195,6 +212,7 @@ namespace VisualProgrammingProject
             this.btnCikis.UseVisualStyleBackColor = true;
             this.btnCikis.Click += new System.EventHandler(this.btnCikis_Click);
             
+            // KullaniciPanel
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;

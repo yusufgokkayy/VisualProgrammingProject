@@ -14,6 +14,10 @@ namespace VisualProgrammingProject
 
         private void KullaniciPanel_Load(object sender, EventArgs e)
         {
+            // DataGridView font ve encoding ayarlarý
+            dgvTrenler.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            dgvBiletlerim.DefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            
             TrenleriYukle();
             BiletleriYukle();
         }
@@ -27,7 +31,10 @@ namespace VisualProgrammingProject
         private void BiletleriYukle()
         {
             dgvBiletlerim.DataSource = null;
-            dgvBiletlerim.DataSource = VeriYoneticisi.BiletleriGetir().OrderBy(b => b.Tarih).ToList();
+            if (Session.AktifKullanici != null && !string.IsNullOrEmpty(Session.AktifKullanici.TC))
+            {
+                dgvBiletlerim.DataSource = VeriYoneticisi.KullaniciBiletleriGetir(Session.AktifKullanici.TC).OrderBy(b => b.Tarih).ToList();
+            }
         }
 
         private void btnAra_Click(object sender, EventArgs e)

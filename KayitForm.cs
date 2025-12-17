@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace VisualProgrammingProject
@@ -19,6 +20,7 @@ namespace VisualProgrammingProject
             string soyad = txtSoyad.Text.Trim();
             string email = txtEmail.Text.Trim();
             string telefon = txtTelefon.Text.Trim();
+            string tc = txtTC.Text.Trim();
 
             if (string.IsNullOrEmpty(kullaniciAdi) || string.IsNullOrEmpty(sifre) || 
                 string.IsNullOrEmpty(ad) || string.IsNullOrEmpty(soyad))
@@ -45,13 +47,25 @@ namespace VisualProgrammingProject
                 return;
             }
 
+            if (!string.IsNullOrEmpty(tc) && tc.Length != 11)
+            {
+                MessageBox.Show("TC Kimlik No 11 haneli olmalýdýr!", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(tc) && !tc.All(char.IsDigit))
+            {
+                MessageBox.Show("TC Kimlik No sadece rakam içermelidir!", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (VeriYoneticisi.KullaniciVarMi(kullaniciAdi))
             {
                 MessageBox.Show("Bu kullanýcý adý zaten kullanýlýyor!", "Uyarý", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            bool sonuc = VeriYoneticisi.KullaniciKaydet(kullaniciAdi, sifre, ad, soyad, email, telefon);
+            bool sonuc = VeriYoneticisi.KullaniciKaydet(kullaniciAdi, sifre, ad, soyad, email, telefon, tc);
 
             if (sonuc)
             {

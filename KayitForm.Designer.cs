@@ -26,6 +26,7 @@ namespace VisualProgrammingProject
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtKullaniciAdi = new System.Windows.Forms.TextBox();
             this.txtSifre = new System.Windows.Forms.TextBox();
             this.txtSifreTekrar = new System.Windows.Forms.TextBox();
@@ -33,6 +34,7 @@ namespace VisualProgrammingProject
             this.txtSoyad = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtTelefon = new System.Windows.Forms.TextBox();
+            this.txtTC = new System.Windows.Forms.TextBox();
             this.btnKayit = new System.Windows.Forms.Button();
             this.btnIptal = new System.Windows.Forms.Button();
             this.lblBaslik = new System.Windows.Forms.Label();
@@ -161,22 +163,39 @@ namespace VisualProgrammingProject
             this.txtTelefon.Size = new System.Drawing.Size(200, 21);
             this.txtTelefon.TabIndex = 14;
             
+            // label8
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label8.Location = new System.Drawing.Point(30, 315);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 15);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "TC Kimlik No:";
+            
+            // txtTC
+            this.txtTC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtTC.Location = new System.Drawing.Point(150, 312);
+            this.txtTC.Name = "txtTC";
+            this.txtTC.Size = new System.Drawing.Size(200, 21);
+            this.txtTC.TabIndex = 16;
+            this.txtTC.MaxLength = 11;
+            
             // btnKayit
             this.btnKayit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnKayit.Location = new System.Drawing.Point(150, 320);
+            this.btnKayit.Location = new System.Drawing.Point(150, 355);
             this.btnKayit.Name = "btnKayit";
             this.btnKayit.Size = new System.Drawing.Size(90, 30);
-            this.btnKayit.TabIndex = 15;
+            this.btnKayit.TabIndex = 17;
             this.btnKayit.Text = "Kayýt Ol";
             this.btnKayit.UseVisualStyleBackColor = true;
             this.btnKayit.Click += new System.EventHandler(this.btnKayit_Click);
             
             // btnIptal
             this.btnIptal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnIptal.Location = new System.Drawing.Point(260, 320);
+            this.btnIptal.Location = new System.Drawing.Point(260, 355);
             this.btnIptal.Name = "btnIptal";
             this.btnIptal.Size = new System.Drawing.Size(90, 30);
-            this.btnIptal.TabIndex = 16;
+            this.btnIptal.TabIndex = 18;
             this.btnIptal.Text = "Ýptal";
             this.btnIptal.UseVisualStyleBackColor = true;
             this.btnIptal.Click += new System.EventHandler(this.btnIptal_Click);
@@ -185,9 +204,11 @@ namespace VisualProgrammingProject
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(400, 380);
+            this.ClientSize = new System.Drawing.Size(400, 415);
             this.Controls.Add(this.btnIptal);
             this.Controls.Add(this.btnKayit);
+            this.Controls.Add(this.txtTC);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtTelefon);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtEmail);
@@ -221,6 +242,7 @@ namespace VisualProgrammingProject
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtKullaniciAdi;
         private System.Windows.Forms.TextBox txtSifre;
         private System.Windows.Forms.TextBox txtSifreTekrar;
@@ -228,6 +250,7 @@ namespace VisualProgrammingProject
         private System.Windows.Forms.TextBox txtSoyad;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTelefon;
+        private System.Windows.Forms.TextBox txtTC;
         private System.Windows.Forms.Button btnKayit;
         private System.Windows.Forms.Button btnIptal;
     }

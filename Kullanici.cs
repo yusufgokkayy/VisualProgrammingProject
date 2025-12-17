@@ -11,6 +11,7 @@ namespace VisualProgrammingProject
         public string Soyad { get; set; }
         public string Email { get; set; }
         public string Telefon { get; set; }
+        public string TC { get; set; }
         public DateTime KayitTarihi { get; set; }
         public bool IsAdmin { get; set; }
 
@@ -20,7 +21,7 @@ namespace VisualProgrammingProject
             IsAdmin = false;
         }
 
-        public Kullanici(int id, string kullaniciAdi, string sifre, string ad, string soyad, string email, string telefon, DateTime kayitTarihi, bool isAdmin)
+        public Kullanici(int id, string kullaniciAdi, string sifre, string ad, string soyad, string email, string telefon, string tc, DateTime kayitTarihi, bool isAdmin)
         {
             Id = id;
             KullaniciAdi = kullaniciAdi;
@@ -29,6 +30,7 @@ namespace VisualProgrammingProject
             Soyad = soyad;
             Email = email;
             Telefon = telefon;
+            TC = tc;
             KayitTarihi = kayitTarihi;
             IsAdmin = isAdmin;
         }
